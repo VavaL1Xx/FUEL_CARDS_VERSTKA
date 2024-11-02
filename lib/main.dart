@@ -42,7 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: [
-
             ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -51,7 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => AZSPage(title: 'АЗС № $_gasStationNumber'),
+                    builder: (context) =>
+                        AZSPage(title: 'АЗС № $_gasStationNumber'),
                   ),
                 );
               },
@@ -61,7 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: const Text('Страница АЗС'),
             ),
-
             ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -80,9 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: const Text('Кнопочки'),
             ),
-
           ],
-        ), 
+        ),
       ),
     );
   }
@@ -122,20 +120,18 @@ class _AZSPageState extends State<AZSPage> {
             width: double.infinity,
             child: Column(
               children: [
-
-                const Align (
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'г. Уфа, ул. Ленина, д. 70',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                      ),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'г. Уфа, ул. Ленина, д. 70',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
                     ),
                   ),
+                ),
                 const SizedBox(height: 20),
-
                 Container(
                   width: double.infinity,
                   height: 150,
@@ -151,22 +147,19 @@ class _AZSPageState extends State<AZSPage> {
                     ),
                   ),
                 ),
-              
                 const SizedBox(height: 20),
-
-                const Align (
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Колонка',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Колонка',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
-
+                ),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -180,18 +173,22 @@ class _AZSPageState extends State<AZSPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: _selectedButton == 1 ? const Color(0xFF3258A2) : Colors.white,
-                          foregroundColor: _selectedButton == 1 ? Colors.white : const Color(0xFF3258A2),
+                          backgroundColor: _selectedButton == 1
+                              ? const Color(0xFF3258A2)
+                              : Colors.white,
+                          foregroundColor: _selectedButton == 1
+                              ? Colors.white
+                              : const Color(0xFF3258A2),
                           side: const BorderSide(color: Color(0xFF3258A2)),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6)
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                          minimumSize: const Size(224,80),
+                              borderRadius: BorderRadius.circular(6)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 32),
+                          minimumSize: const Size(224, 80),
                           textStyle: const TextStyle(fontSize: 28),
                         ),
                         child: const Text('1'),
-                      ), 
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Flexible(
@@ -203,18 +200,22 @@ class _AZSPageState extends State<AZSPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: _selectedButton == 2 ? const Color(0xFF3258A2) : Colors.white,
-                          foregroundColor: _selectedButton == 2 ? Colors.white : const Color(0xFF3258A2),
+                          backgroundColor: _selectedButton == 2
+                              ? const Color(0xFF3258A2)
+                              : Colors.white,
+                          foregroundColor: _selectedButton == 2
+                              ? Colors.white
+                              : const Color(0xFF3258A2),
                           side: const BorderSide(color: Color(0xFF3258A2)),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6)
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                          minimumSize: const Size(224,80),
+                              borderRadius: BorderRadius.circular(6)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 32),
+                          minimumSize: const Size(224, 80),
                           textStyle: const TextStyle(fontSize: 28),
                         ),
                         child: const Text('2'),
-                      ), 
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Flexible(
@@ -226,136 +227,152 @@ class _AZSPageState extends State<AZSPage> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: _selectedButton == 3 ? const Color(0xFF3258A2) : Colors.white,
-                          foregroundColor: _selectedButton == 3 ? Colors.white : const Color(0xFF3258A2),
+                          backgroundColor: _selectedButton == 3
+                              ? const Color(0xFF3258A2)
+                              : Colors.white,
+                          foregroundColor: _selectedButton == 3
+                              ? Colors.white
+                              : const Color(0xFF3258A2),
                           side: const BorderSide(color: Color(0xFF3258A2)),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6)
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                          minimumSize: const Size(224,80),
+                              borderRadius: BorderRadius.circular(6)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 32),
+                          minimumSize: const Size(224, 80),
                           textStyle: const TextStyle(fontSize: 28),
                         ),
                         child: const Text('3'),
-                      ), 
-                    ),
-                  ],
-                  ),
-                  const SizedBox(height: 20),
-                  Align (
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Колонка № $_selectedButton',
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
                       ),
                     ),
-                  ),
-
-                  const SizedBox(height: 20),
-                  
-                  SizedBox(
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          decoration:   BoxDecoration(
-                            color: _selectedButton != 2 ? const Color(0xFFE6F1F8) : const Color(0xFFF3F3F3),
-                            borderRadius: const BorderRadius.all(Radius.circular(8)), // Скругление границ
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Внутренние отступы
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Объем', style: TextStyle(fontSize: 16)),
-                              Text(
-                                _selectedButton != 2 ? '5 л' : '0 л', 
-                                style: const TextStyle(
-                                  fontSize: 16, 
-                                  fontWeight: FontWeight.bold
-                                  )
-                                ),
-                            ],
-                          ),
-                        ),
-                        
-                        const SizedBox(height: 10), // Отступ между контейнерами
-                        
-                        Container(
-                          decoration: BoxDecoration(
-                            color: _selectedButton != 2 ? const Color(0xFFE6F1F8) : const Color(0xFFF3F3F3),
-                            borderRadius: const BorderRadius.all(Radius.circular(8)),
-                          ),
-                          padding: const  EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Топливо', style: TextStyle(fontSize: 16)),
-                              Text(
-                                _selectedButton != 2 ? '5 л' : '-', 
-                                style: const TextStyle(
-                                  fontSize: 16, 
-                                  fontWeight: FontWeight.bold
-                                  )
-                                  ),
-                            ],
-                          ),
-                        ),
-                      ],
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Колонка № $_selectedButton',
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
-                  
-                  const SizedBox(height: 20),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          color: _selectedButton != 2
+                              ? const Color(0xFFE6F1F8)
+                              : const Color(0xFFF3F3F3),
+                          borderRadius: const BorderRadius.all(
+                              Radius.circular(8)), // Скругление границ
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 16), // Внутренние отступы
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Объем', style: TextStyle(fontSize: 16)),
+                            Text(_selectedButton != 2 ? '5 л' : '0 л',
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ),
 
-                  Container(
-                    decoration: BoxDecoration(
+                      const SizedBox(height: 10), // Отступ между контейнерами
+
+                      Container(
+                        decoration: BoxDecoration(
+                          color: _selectedButton != 2
+                              ? const Color(0xFFE6F1F8)
+                              : const Color(0xFFF3F3F3),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12, horizontal: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('Топливо',
+                                style: TextStyle(fontSize: 16)),
+                            Text(_selectedButton != 2 ? '5 л' : '-',
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  decoration: BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
-                        color: _selectedButton != 2 ? const Color(0xFF3258A2) : const Color(0xFFC5C5C5),
+                        color: _selectedButton != 2
+                            ? const Color(0xFF3258A2)
+                            : const Color(0xFFC5C5C5),
                         width: 1.0,
-                        ),
                       ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text('СУММА К ОПЛАТЕ:', style: TextStyle(color:_selectedButton != 2 ? const Color(0xFF3258A2) : const Color(0xFFC5C5C5), fontSize: 16, fontWeight: FontWeight.bold)),
-                        Text(_selectedButton != 2 ? '1 400,25 ₽' : '-', style: TextStyle(color:_selectedButton != 2 ? const Color(0xFF3258A2) : const Color(0xFFC5C5C5), fontSize: 16, fontWeight: FontWeight.bold)),
-                      ],
                     ),
                   ),
-
-                  const SizedBox(height: 10),
-                  if (!(_selectedButton == 2))...[
-                    const Text(
-                      'Если обнаружится недостаточное количество товара, система автоматически отменит операцию и произведёт перерасчёт.',
-                      style: TextStyle(
-                        color: Color(0xFF747474),
-                      ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text('СУММА К ОПЛАТЕ:',
+                          style: TextStyle(
+                              color: _selectedButton != 2
+                                  ? const Color(0xFF3258A2)
+                                  : const Color(0xFFC5C5C5),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold)),
+                      Text(_selectedButton != 2 ? '1 400,25 ₽' : '-',
+                          style: TextStyle(
+                              color: _selectedButton != 2
+                                  ? const Color(0xFF3258A2)
+                                  : const Color(0xFFC5C5C5),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                if (!(_selectedButton == 2)) ...[
+                  const Text(
+                    'Если обнаружится недостаточное количество товара, система автоматически отменит операцию и произведёт перерасчёт.',
+                    style: TextStyle(
+                      color: Color(0xFF747474),
                     ),
-                  ],
-
-                  const SizedBox(height: 20),
-
-                  SizedBox(
-                    child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: _selectedButton != 2 ? const Color(0xFF3258A2) : const Color(0xFFC5C5C5),
-                          foregroundColor: Colors.white,
-                          side: BorderSide(color: _selectedButton != 2 ? const Color(0xFF3258A2) : const Color(0xFFC5C5C5)),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          textStyle: const TextStyle(fontSize: 18),
-                          minimumSize: const Size(double.infinity, 48),
-                        ),
-                        child: const Text('Оплатить заказ'),
-                      ), 
-                  )
+                  ),
+                ],
+                const SizedBox(height: 20),
+                SizedBox(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _selectedButton != 2
+                          ? const Color(0xFF3258A2)
+                          : const Color(0xFFC5C5C5),
+                      foregroundColor: Colors.white,
+                      side: BorderSide(
+                          color: _selectedButton != 2
+                              ? const Color(0xFF3258A2)
+                              : const Color(0xFFC5C5C5)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      textStyle: const TextStyle(fontSize: 18),
+                      minimumSize: const Size(double.infinity, 48),
+                    ),
+                    child: const Text('Оплатить заказ'),
+                  ),
+                )
               ],
             ),
           ),
@@ -397,10 +414,12 @@ class _LoginPageState extends State<LoginPage> {
 
       if (!mounted) return; // Проверка на то, что виджет все еще смонтирован
 
-      if (usernameController.text == 'admin' && passwordController.text == 'password') {
+      if (usernameController.text == 'admin' &&
+          passwordController.text == 'password') {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const MainMenuPage(title: 'Меню')),
+          MaterialPageRoute(
+              builder: (context) => const MainMenuPage(title: 'Меню')),
         );
       } else {
         if (mounted) {
@@ -425,7 +444,8 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Вход в систему', style: TextStyle(color: Colors.white)),
+        title:
+            const Text('Вход в систему', style: TextStyle(color: Colors.white)),
         backgroundColor: const Color(0xFF2C519C),
       ),
       body: SingleChildScrollView(
@@ -434,7 +454,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-           const SizedBox(height: 40),
+            const SizedBox(height: 40),
             const Icon(
               Icons.local_gas_station,
               size: 100,
@@ -452,7 +472,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Color(0xFF2C519C), width: 2),
+                  borderSide:
+                      const BorderSide(color: Color(0xFF2C519C), width: 2),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -473,7 +494,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Color(0xFF2C519C), width: 2),
+                  borderSide:
+                      const BorderSide(color: Color(0xFF2C519C), width: 2),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -530,7 +552,7 @@ class MainMenuPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor:const Color(0xFF2C519C),
+        backgroundColor: const Color(0xFF2C519C),
         elevation: 0,
         title: const Text(
           'Меню',
@@ -548,7 +570,7 @@ class MainMenuPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        color:const Color(0xFF2C519C),
+        color: const Color(0xFF2C519C),
         child: Column(
           children: [
             Expanded(
@@ -562,7 +584,9 @@ class MainMenuPage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const LoginPage(title: 'Логин')),
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const LoginPage(title: 'Логин')),
                         );
                       },
                     ),
@@ -587,7 +611,8 @@ class MainMenuPage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const PaymentSuccessPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentSuccessPage()),
                         );
                       },
                     ),
@@ -605,7 +630,9 @@ class MainMenuPage extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const LoginPage(title: 'Логин')),
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const LoginPage(title: 'Логин')),
                         );
                       },
                       style: OutlinedButton.styleFrom(
@@ -632,6 +659,7 @@ class MainMenuPage extends StatelessWidget {
       ),
     );
   }
+
   // Функция для показа модального окна
   void _showGasStationInfo(BuildContext context) {
     showModalBottomSheet(
@@ -688,9 +716,10 @@ class MenuButton extends StatelessWidget {
   }
 }
 
-
 class PaymentSuccessPage extends StatelessWidget {
-  const PaymentSuccessPage({super.key,});
+  const PaymentSuccessPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -719,7 +748,8 @@ class PaymentSuccessPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: const Color(0xFF2C519C),
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -737,12 +767,14 @@ class PaymentSuccessPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginPage(title: 'Логин')),
+                  MaterialPageRoute(
+                      builder: (context) => const LoginPage(title: 'Логин')),
                 );
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Colors.white),
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -761,7 +793,6 @@ class PaymentSuccessPage extends StatelessWidget {
     );
   }
 }
-
 
 // Создаем отдельный класс для модального окна
 class GasStationInfoModal extends StatelessWidget {
@@ -802,134 +833,286 @@ class GasStationInfoModal extends StatelessWidget {
         child: GestureDetector(
           onTap: () {},
           child: DraggableScrollableSheet(
-            initialChildSize: 0.5,
+            initialChildSize: 0.6,
             minChildSize: 0.3,
-            maxChildSize: 0.8,
+            maxChildSize: 0.9,
             builder: (context, scrollController) {
               return Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                 ),
-                child: ListView(
-                  controller: scrollController,
+                child: Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    const SizedBox(height: 8),
+                    Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        controller: scrollController,
+                        padding: const EdgeInsets.all(16),
                         children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'АЗС № 00000',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.favorite_border),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
                           const Text(
-                            'АЗС № 00000',
+                            'г. Уфа, ул. Ленина, д. 70',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: const [
+                              Text(
+                                'Расстояние до АЗС',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                '2.4 км',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {},
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: const Color(0xFF3B5998),
+                                    side: const BorderSide(
+                                      color: Color(0xFF3B5998),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                  ),
+                                  child: const Text(
+                                    'Маршруты',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AZSPage(title: 'АЗС'),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF3B5998),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12),
+                                  ),
+                                  child: const Text(
+                                    'Заправиться',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 24),
+                          const Text(
+                            'Топливо и цены',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text('г. Уфа, ул. Ленина, д. 70'),
-                          const SizedBox(height: 8),
-                          const Text('Расстояние до АЗС: 2.4 км'),
+                          Text(
+                            'на 00:00 08.10.2024 (московское время)',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[600],
+                            ),
+                          ),
                           const SizedBox(height: 16),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text('Маршруты'),
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const [
+                                      Text(
+                                        '95 ЭКТО',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        '61.25 ₽',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const AZSPage(title: 'АЗС')),
-                                  );
-                                },
-                                child: const Text('Заправиться'),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: const [
+                                      Text(
+                                        'ДТ ЭКТО',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        '66.02 ₽',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),
-                          const Divider(height: 32),
-                          const Text(
-                                'Топливо и цены', // Заголовок секции
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              const Text(
-                                  'на 00:00 08.10.2024 (московское время)'), // Время обновления информации
-                              const SizedBox(height: 8),
-                              Row(
+                          const SizedBox(height: 12),
+                          Text(
+                            'Информация о ценах на топливо не является публичной офертой. '
+                            'Сведения о наличии и цене топлива на АЗС рекомендуем уточнить у сотрудников АЗС. '
+                            'Фактическая цена топлива на АЗС может отличаться от информации, '
+                            'размещенной в мобильном приложении.',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[600],
+                              height: 1.4,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          InkWell(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: [
-                                  _buildFuelCard('95 ЭКТО',
-                                      '61.25 ₽'), // Карточка с информацией о топливе
-                                  _buildFuelCard('ДТ ЭКТО', '66.02 ₽'),
+                                children: const [
+                                  Text(
+                                    'Об инновационной линейке ЭКТО',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Color(0xFF3B5998),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right,
+                                    color: Color(0xFF3B5998),
+                                  ),
                                 ],
                               ),
-                              const SizedBox(height: 16),
-                              const Text(
-                                'Информация о ценах на топливо не является публичной офертой.',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors
-                                        .grey), // Мелкий шрифт для примечания
-                              ),
-                              const SizedBox(height: 16),
-                              ListTile(
-                                title: const Text(
-                                    'Об инновационной линейке ЭКТО'), // Элемент списка
-                                trailing:
-                                    const Icon(Icons.arrow_forward), // Стрелка справа
-                                onTap: () {}, // Действие при нажатии на элемент
-                              ),
-                              const Divider(height: 32),
-                              const Text(
-                                'Способ оплаты', // Заголовок секции
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Wrap(
-                                spacing: 8, // Расстояние между элементами
-                                runSpacing: 8, // Расстояние между строками
-                                children: [
-                                  _buildPaymentMethodChip(
-                                      'Безналичный расчет'), // Чип с информацией о способе оплаты
-                                  _buildPaymentMethodChip(
-                                      'Бесконтактные платежи'),
-                                  _buildPaymentMethodChip('Топливные карты'),
-                                ],
-                              ),
-                              const Divider(height: 32),
-                              const Text(
-                                'Услуги', // Заголовок секции
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              const ListTile(
-                                title: Text(
-                                    'Автомойка'), // Элемент списка с услугой
-                              ),
-                              const Divider(height: 32),
-                              ListTile(
-                                title: const Text(
-                                    'Написать отзыв'), // Элемент списка для написания отзыва
-                                trailing:
-                                    const Icon(Icons.arrow_forward), // Стрелка справа
-                                onTap: () {},
-                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          const Text(
+                            'Способ оплаты',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              _buildPaymentOption('Безналичный расчет'),
+                              _buildPaymentOption('Бесконтактные платежи'),
+                              _buildPaymentOption('Топливные карты'),
+                            ],
+                          ),
+                          const SizedBox(height: 24),
+                          const Text(
+                            'Услуги',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Text(
+                              'Автомойка',
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -939,6 +1122,20 @@ class GasStationInfoModal extends StatelessWidget {
             },
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildPaymentOption(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 16),
       ),
     );
   }
