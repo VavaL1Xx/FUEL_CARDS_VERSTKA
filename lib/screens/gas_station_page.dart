@@ -4,9 +4,10 @@ import '../widgets/insert_pistol_widget.dart';
 
 
 class GasStationPage extends StatefulWidget {
-  const GasStationPage({super.key, required this.title});
+  const GasStationPage({super.key, required this.gasStationDetail});
 
-  final String title;
+  // Симуляция ответа от API
+  final dynamic gasStationDetail;
 
   @override
   State<GasStationPage> createState() => _GasStationPageState();
@@ -16,12 +17,12 @@ class _GasStationPageState extends State<GasStationPage> {
   int _selectedButton = 1;
   bool _isFilling = false;
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFFFFFFF),
-        title: Text(widget.title),
+        title: Text(widget.gasStationDetail["azs_name"]),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.close, color: Color(0xFF3258A2)),
@@ -39,12 +40,12 @@ class _GasStationPageState extends State<GasStationPage> {
             child: Column(
               children: [
 
-                const Align (
+                Align (
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'г. Уфа, ул. Ленина, д. 70',
+                      widget.gasStationDetail["azs_adress"],
                       textAlign: TextAlign.left,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         color: Colors.black,
                       ),
@@ -60,7 +61,9 @@ class _GasStationPageState extends State<GasStationPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10), // Скругление углов
+                  //widget.gasStationDetail["azs_longitude"],
+                  //widget.gasStationDetail["azs_latitude"],
+                    borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
                       'assets/jpg/map.jpg',
                       fit: BoxFit.cover,
@@ -73,7 +76,7 @@ class _GasStationPageState extends State<GasStationPage> {
                 const Align (
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Колонка',
+                      'Колонки',
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 18,
@@ -82,7 +85,7 @@ class _GasStationPageState extends State<GasStationPage> {
                       ),
                     ),
                   ),
-const SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -162,12 +165,12 @@ const SizedBox(height: 20),
                       selectedButton: _selectedButton,
                       onPaymentPressed: () {
                       setState(() {
-                        _isFilling = true; // Изменяем состояние
+                        _isFilling = true;
                       });
                       }
                     ),
                   ] else ...[
-                    InsertPistolWidget(),
+                   const InsertPistolWidget(),
                   ],
               ],
             ),

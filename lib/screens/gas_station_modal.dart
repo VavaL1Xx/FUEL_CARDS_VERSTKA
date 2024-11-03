@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import './gas_station_page.dart';
 import './gas_station_map.dart';
 
-// Создаем отдельный класс для модального окна
 class GasStationInfoModal extends StatelessWidget {
-  const GasStationInfoModal({super.key});
+  const GasStationInfoModal({super.key, required this.gasStationDetails});
+  
+  final dynamic gasStationDetails;
 
-  // Вспомогательный метод для создания карточки с информацией о топливе
   Widget _buildFuelCard(String name, String price) {
     return Card(
       child: Padding(
@@ -22,6 +23,10 @@ class GasStationInfoModal extends StatelessWidget {
     );
   }
 
+  Map<String, dynamic> getGasStationDetails() {
+    return gasStationDetails; // Возвращаем данные, которые уже есть в виджете
+  }
+
   // Вспомогательный метод для создания чипа со способом оплаты
   Widget _buildPaymentMethodChip(String label) {
     return Chip(
@@ -29,7 +34,7 @@ class GasStationInfoModal extends StatelessWidget {
       backgroundColor: Colors.grey[200],
     );
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -72,9 +77,9 @@ class GasStationInfoModal extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'АЗС № 00000',
-                                style: TextStyle(
+                              Text(
+                                gasStationDetails['azs_name'],
+                                style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -86,9 +91,9 @@ class GasStationInfoModal extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          const Text(
-                            'г. Уфа, ул. Ленина, д. 70',
-                            style: TextStyle(
+                          Text(
+                            gasStationDetails['azs_adress'],
+                            style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black87,
                             ),
@@ -149,9 +154,9 @@ class GasStationInfoModal extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            const GasStationPage(title: 'АЗС',
-                                          ),
+                                        builder: (context) => GasStationPage(
+                                          gasStationDetail: getGasStationDetails(),
+                                        ),
                                       ),
                                     );
                                   },
@@ -181,7 +186,7 @@ class GasStationInfoModal extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'на 00:00 08.10.2024 (московское время)',
+                            'на ${DateFormat("HH:mm dd.MM.yyyy").format(DateTime.parse(gasStationDetails["azs_config_date"]))}, (московское время)',
                             style: TextStyle(
                               fontSize: 14,
                               color: Colors.grey[600],
@@ -191,66 +196,52 @@ class GasStationInfoModal extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '95 ЭКТО',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      SizedBox(height: 4),
-                                      Text(
-                                        '61.25 ₽',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(
+                                      gasStationDetails['fueling_points'][0]['fuel_list'].length,
+                                      (index) {
+                                        final fuel = gasStationDetails['fueling_points'][0]['fuel_list'][index];
+                                        return Padding(
+                                          padding: EdgeInsets.only(
+                                            right: index != gasStationDetails['fueling_points'][0]['fuel_list'].length - 1 ? 12 : 0,
+                                          ),
+                                          child: Container(
+                                            width: 120,
+                                            padding: const EdgeInsets.all(16),
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[100],
+                                              borderRadius: BorderRadius.circular(12),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  fuel['product_name'],
+                                                  style: const TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  '${(fuel['product_price'] / 100).toStringAsFixed(2)} ₽',
+                                                  style: const TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
                               const SizedBox(width: 12),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[100],
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'ДТ ЭКТО',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                      SizedBox(height: 4),
-                                      Text(
-                                        '66.02 ₽',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                           const SizedBox(height: 12),
