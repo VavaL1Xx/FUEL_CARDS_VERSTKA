@@ -6,157 +6,153 @@ class LoginPage extends StatefulWidget {
   final String title;
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool isLoading = false;
-  String errorMessage = '';
 
-  void _handleLogin() async {
-    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
-      setState(() {
-        errorMessage = 'Пожалуйста, заполните все поля';
-      });
-      return;
-    }
+  // Тестовые данные пользователей
+  final Map<String, String> testUsers = {
+    'test@example.com': 'password123', // Тестовый пользователь 1
+    'user@example.com': 'mypassword',   // Тестовый пользователь 2
+  };
 
-    setState(() {
-      isLoading = true;
-      errorMessage = '';
-    });
-
-    try {
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (!mounted) return; // Проверка на то, что виджет все еще смонтирован
-
-      if (usernameController.text == 'admin' &&
-          passwordController.text == 'password') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const MainMenuPage()),
-        );
-      } else {
-        if (mounted) {
-          setState(() {
-            errorMessage = 'Неверное имя пользователя или пароль';
-          });
-        }
-      }
-    } catch (e) {
-      setState(() {
-        errorMessage = 'Произошла ошибка при входе';
-      });
-    } finally {
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
+  String errorMessage = ''; // Сообщение об ошибке
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title:
-            const Text('Вход в систему', style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF2C519C),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 40),
-            const Icon(
-              Icons.local_gas_station,
-              size: 100,
-              color: Color(0xFF2C519C),
-            ),
-            const SizedBox(height: 40),
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(
-                labelText: 'Имя пользователя',
-                labelStyle: const TextStyle(color: Color(0xFF2C519C)),
-                prefixIcon: const Icon(Icons.person, color: Color(0xFF2C519C)),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide:
-                      const BorderSide(color: Color(0xFF2C519C), width: 2),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Пароль',
-                labelStyle: const TextStyle(color: Color(0xFF2C519C)),
-                prefixIcon: const Icon(Icons.lock, color: Color(0xFF2C519C)),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide:
-                      const BorderSide(color: Color(0xFF2C519C), width: 2),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.grey),
-                ),
-              ),
-            ),
-            if (errorMessage.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  errorMessage,
-                  style: const TextStyle(color: Colors.red),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            const SizedBox(height: 24),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2C519C),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: isLoading ? null : _handleLogin,
-              child: isLoading
-                  ? const SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        strokeWidth: 2,
-                      ),
-                    )
-                  : const Text(
-                      'Войти',
-                      style: TextStyle(fontSize: 16),
+      backgroundColor: const Color(0xFF2C519C),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image.asset(
+                      'assets/Frame.jpg',
+                      fit: BoxFit.cover,
                     ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Text(
+                  'Вход\nв личный кабинет',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: TextFormField(
+                    controller: usernameController,
+                    decoration: const InputDecoration(
+                      hintText: 'Логин (email)',
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: TextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: 'Пароль',
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Отображение сообщения об ошибке
+                if (errorMessage.isNotEmpty) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text(
+                      errorMessage,
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        // Проверка на наличие пользователя
+                        final String username = usernameController.text;
+                        final String password = passwordController.text;
+
+                        if (testUsers[username] == password) {
+                          // Если логин и пароль совпадают с тестовыми данными, переходим на главную страницу
+                          setState(() {
+                            errorMessage = ''; // Очищаем сообщение об ошибке
+                          });
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const MainMenuPage()),
+                          );
+                        } else {
+                          // Показать сообщение об ошибке
+                          setState(() {
+                            errorMessage = 'Неверный логин или пароль. Авторизация не выполнена.';
+                          });
+                        }
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      side: const BorderSide(color: Colors.white),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    child: const Text(
+                      'Войти',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

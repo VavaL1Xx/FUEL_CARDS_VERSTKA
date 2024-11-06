@@ -6,10 +6,10 @@ class PaymentDetailsWidget extends StatelessWidget {
 
   // Конструктор с обязательным параметром
   const PaymentDetailsWidget({
-    Key? key, 
+    super.key, 
     required this.selectedButton,
     required this.onPaymentPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

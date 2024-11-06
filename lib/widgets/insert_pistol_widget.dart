@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/payment_success.dart';
 
 class InsertPistolWidget extends StatefulWidget {
-  const InsertPistolWidget({Key? key}) : super(key: key);
+  const InsertPistolWidget({super.key});
 
   @override
   State<InsertPistolWidget> createState() => _InsertPistolWidgetState();
