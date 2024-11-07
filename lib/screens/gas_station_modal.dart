@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import './gas_station_page.dart';
-import './gas_station_map.dart';
 
 class GasStationInfoModal extends StatelessWidget {
   const GasStationInfoModal({super.key, required this.gasStationDetails});
@@ -123,15 +122,7 @@ class GasStationInfoModal extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MapScreen(),
-                                      ),
-                                    );
-                                  },
+                                  onPressed: () {},
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.white,
                                     foregroundColor: const Color(0xFF3B5998),

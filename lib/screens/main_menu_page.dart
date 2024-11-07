@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import './gas_station_modal.dart';
+import './gas_station_map.dart';
 import './user_login_page.dart';
 
 class MainMenuPage extends StatelessWidget {
   const MainMenuPage({super.key});
 
-    dynamic getGasStationDetails(){
+    static dynamic getGasStationDetails(){
     return {
       "azs_config_date": "2023-06-06T11:34:30.490+03:00",
       "pos_config": [
@@ -133,55 +133,75 @@ class MainMenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      backgroundColor: const Color(0xFF2C519C),
+      automaticallyImplyLeading: false, // Убирает стандартную кнопку "назад"
+      toolbarHeight: 96,
+      flexibleSpace: Container(
+        padding: const EdgeInsets.fromLTRB(16, 32, 16, 12),
+        alignment: Alignment.bottomCenter, // Выравнивание контента по нижнему краю
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 5, bottom: 5, left: 7, right: 7),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.menu, 
+                  color: Colors.white,
+                  size: 32, 
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            const Text(
+              'Карта',
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 5, bottom: 5, left: 7, right: 7),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.notifications_outlined, 
+                  color: Colors.white,
+                  size: 32, 
+                  ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => const MainMenuPage()),
+                );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
       body: Container(
         color: const Color(0xFF2C519C), // Устанавливаем синий фон
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(top: 5, bottom:5, left:7, right:7), // Внутренние отступы для рамки
-                    decoration: BoxDecoration(
-                      color: Colors.transparent, // Цвет фона рамки (если нужен)
-                      border: Border.all(
-                        color: Colors.white, // Цвет рамки
-                        width: 1, // Ширина рамки
-                      ),
-                      borderRadius: BorderRadius.circular(12.0), // Скругление углов
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.menu, color: Colors.white),
-                      onPressed: () {},
-                    ),
-                  ),
-                  const Text(
-                    'Меню',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white, // Цвет текста меню белый
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 5, bottom:5, left:7, right:7), // Внутренние отступы для рамки
-                    decoration: BoxDecoration(
-                      color: Colors.transparent, // Цвет фона рамки (если нужен)
-                      border: Border.all(
-                        color: Colors.white, // Цвет рамки
-                        width: 1, // Ширина рамки
-                      ),
-                      borderRadius: BorderRadius.circular(12.0), // Скругление углов
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.notifications_outlined, color: Colors.white),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
-            ),
             const SizedBox(height: 50), // Отступ между меню и блоком с элементами
             Expanded(
               child: ListView(
@@ -211,7 +231,15 @@ class MainMenuPage extends StatelessWidget {
                       color: Colors.white, // Цветовое наложение (по необходимости)
                     ),
                     title: 'Топливные карты',
-                    onTap: () => _showGasStationInfo(context)
+                    onTap: () {
+                      Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MapScreen(),
+                                      ),
+                                    );
+                    }
                   ),
                   _buildMenuItem(
                     image: Image.asset(
@@ -289,18 +317,7 @@ class MainMenuPage extends StatelessWidget {
     );
   }
 
-  void _showGasStationInfo(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      isDismissible: true,
-      builder: (context) => GasStationInfoModal(
-        gasStationDetails: getGasStationDetails()
-      ),
-    );
-  }
-  
+    
   Widget _buildMenuItem({
   required Image image,
   required String title,
@@ -328,7 +345,7 @@ class MainMenuPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 48, 89, 171), // Цвет фона при наведении
+                    color: const Color.fromARGB(255, 48, 89, 171),
                     border: Border.all(
                       color: Colors.white,
                       width: 1,
@@ -353,11 +370,13 @@ class MainMenuPage extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              height: 1,
-              color: Colors.white,
-              width: 400,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                margin: const EdgeInsets.only(left: 64), // Отступ до начала линии
+                height: 1,
+                color: Colors.white,
+            ),
             ),
           ],
         ),

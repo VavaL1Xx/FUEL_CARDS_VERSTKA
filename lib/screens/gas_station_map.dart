@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
+import './main_menu_page.dart';
+import './gas_station_modal.dart';
+
 class MapScreen extends StatefulWidget {
   const MapScreen({
     super.key,
@@ -61,8 +64,9 @@ class _MapScreenState extends State<MapScreen> {
     appBar: AppBar(
       backgroundColor: const Color(0xFF2C519C),
       automaticallyImplyLeading: false, // Убирает стандартную кнопку "назад"
+      toolbarHeight: 96,
       flexibleSpace: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 12),
+        padding: const EdgeInsets.fromLTRB(16, 32, 16, 12),
         alignment: Alignment.bottomCenter, // Выравнивание контента по нижнему краю
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,14 +82,22 @@ class _MapScreenState extends State<MapScreen> {
                 borderRadius: BorderRadius.circular(12.0),
               ),
               child: IconButton(
-                icon: const Icon(Icons.menu, color: Colors.white),
-                onPressed: () {},
+                icon: const Icon(
+                  Icons.menu, 
+                  color: Colors.white,
+                  size: 32, 
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => const MainMenuPage()),
+                );
+                },
               ),
             ),
             const Text(
-              'Меню',
+              'Карта',
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 24,
                 color: Colors.white,
               ),
             ),
@@ -100,8 +112,16 @@ class _MapScreenState extends State<MapScreen> {
                 borderRadius: BorderRadius.circular(12.0),
               ),
               child: IconButton(
-                icon: const Icon(Icons.notifications_outlined, color: Colors.white),
-                onPressed: () {},
+                icon: const Icon(
+                  Icons.notifications_outlined, 
+                  color: Colors.white,
+                  size: 32, 
+                  ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => const MainMenuPage()),
+                );
+                },
               ),
             ),
           ],
@@ -139,7 +159,8 @@ class _MapScreenState extends State<MapScreen> {
         child: GestureDetector(
           onTap: () {
             _mapController.move(_mapPoints[index], 15);
-            _showMarkerInfo(context, index);
+            // _showMarkerInfo(context, index);
+            _showGasStationInfo(context);
           },
           child: Image.asset('assets/png/lukoil.png'),
         ),
@@ -147,13 +168,25 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  /// Метод для отображения информации о маркере
-  void _showMarkerInfo(BuildContext context, int index) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Маркер $index: ${_mapPoints[index]}'),
-        duration: const Duration(seconds: 2),
+  void _showGasStationInfo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      isDismissible: true,
+      builder: (context) => GasStationInfoModal(
+        gasStationDetails: MainMenuPage.getGasStationDetails()
       ),
     );
   }
+
+  /// Метод для отображения информации о маркере
+  // void _showMarkerInfo(BuildContext context, int index) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text('Маркер $index: ${_mapPoints[index]}'),
+  //       duration: const Duration(seconds: 2),
+  //     ),
+  //   );
+  // }
 }
