@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+
+import 'package:latlong2/latlong.dart';
 import '../widgets/payment_details_widget.dart';
 import '../widgets/insert_pistol_widget.dart';
 
@@ -17,7 +20,7 @@ class _GasStationPageState extends State<GasStationPage> {
   int _selectedButton = 1;
   bool _isFilling = false;
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -39,38 +42,51 @@ class _GasStationPageState extends State<GasStationPage> {
             width: double.infinity,
             child: Column(
               children: [
-
-                Align (
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      widget.gasStationDetail["azs_adress"],
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                const SizedBox(height: 20),
-
-                Container(
-                  width: double.infinity,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ClipRRect(
-                  //widget.gasStationDetail["azs_longitude"],
-                  //widget.gasStationDetail["azs_latitude"],
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      'assets/jpg/map.jpg',
-                      fit: BoxFit.cover,
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    widget.gasStationDetail["azs_adress"],
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
                     ),
                   ),
                 ),
-              
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 150,
+                  child: FlutterMap(
+                    options: MapOptions(
+                      initialCenter: LatLng(
+                        widget.gasStationDetail["azs_latitude"],
+                        widget.gasStationDetail["azs_longitude"],
+                      ),
+                      initialZoom: 15.0,
+                    ),
+                    children: [
+                      TileLayer(
+                        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        userAgentPackageName: 'com.example.app',
+                      ),
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            rotate: true,
+                            point: LatLng(
+                              widget.gasStationDetail["azs_latitude"],
+                              widget.gasStationDetail["azs_longitude"],
+                            ), // Используем coordinates из GasStation
+                            width: 30,
+                            height: 30,
+                            child: Image.asset('assets/png/lukoil.png'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 20),
 
                 const Align (
@@ -180,3 +196,4 @@ class _GasStationPageState extends State<GasStationPage> {
     );
   }
 }
+
