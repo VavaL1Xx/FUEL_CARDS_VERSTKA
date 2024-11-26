@@ -46,52 +46,50 @@ class _MapScreenState extends State<MapScreen> {
     super.dispose();
   }
 
-  Future<void> _fetchGasStations() async {
-    final url = Uri.parse('https://api-b2b-test.licard.com/smp-provider/api/v1/public/ais/list');
-    const String token = 'c8d8a09ce677eb8a5dd6d303342eb184'; // Замените на ваш токен
-    try {
-      final response = await http.get(
-        url,
-        headers: {
-          'token': token,
-          'Accept': '*/*',
-          'Accept-Encoding': 'gzip, deflate, br',
-          'Content-Type': 'application/json',
-        },
-      );
+Future<void> _fetchGasStations() async {
+  final url = Uri.parse('https://api-b2b-test.licard.com/smp-provider/api/v1/public/ais/list');
+  const String token = 'c8d8a09ce677eb8a5dd6d303342eb184'; // Замените на ваш токен
+  try {
+    final response = await http.get(
+      url,
+      headers: {
+        'token': token,
+        'Content-Type': 'application/json',
+      },
+    );
 
-      if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      final decodedBody = utf8.decode(response.bodyBytes);
+      final List<dynamic> data = jsonDecode(decodedBody);
 
-        setState(() {
-          _mapPoints = data
-    .map<GasStation>((item) => GasStation(
-          id: item['azsId'], // Убедитесь, что API возвращает уникальный id
-          coordinates: LatLng(
-            item['azsCoordinates']['lat'],
-            item['azsCoordinates']['lon'],
-          ),
-        ))
-    .toList();
-              
-          _isLoading = false;
-        });
-      } else {
-        throw Exception('Ошибка: ${response.statusCode}');
-      }
-    } catch (e) {
       setState(() {
-        _errorMessage = 'Ошибка загрузки данных: $e';
+        _mapPoints = data
+          .map<GasStation>((item) => GasStation(
+                id: item['azsId'],
+                coordinates: LatLng(
+                  item['azsCoordinates']['lat'],
+                  item['azsCoordinates']['lon'],
+                ),
+              ))
+          .toList();
         _isLoading = false;
       });
+    } else {
+      throw Exception('Ошибка: ${response.statusCode}');
     }
+  } catch (e) {
+    setState(() {
+      _errorMessage = 'Ошибка загрузки данных: $e';
+      _isLoading = false;
+    });
   }
+}
 
 Future<Map<String, dynamic>> fetchGasStationDetailsFromMap(BuildContext context, int id) async {
   final url = Uri.parse('https://api-b2b-test.licard.com/smp-provider/api/v1/public/ais/detail').replace(
     queryParameters: {
       'id': id.toString(),
-    }
+    },
   );
   const String token = 'c8d8a09ce677eb8a5dd6d303342eb184'; // Замените на свой токен
 
@@ -107,23 +105,20 @@ Future<Map<String, dynamic>> fetchGasStationDetailsFromMap(BuildContext context,
     );
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      final decodedBody = utf8.decode(response.bodyBytes);
+      final data = jsonDecode(decodedBody) as Map<String, dynamic>;
 
-      // Проверка кода ответа API
       if (data['response_code'] == 0) {
-        return data; // Возвращаем данные
+        return data;
       } else {
-        // Показываем диалоговое окно с ошибкой от API
         _showErrorDialog(context, 'Ошибка: ${data['response_message']}');
         return {};
       }
     } else {
-      // Показываем диалоговое окно с ошибкой запроса
       _showErrorDialog(context, 'Ошибка запроса: ${response.statusCode}');
       return {};
     }
   } catch (e) {
-    // Показываем диалоговое окно с ошибкой подключения
     _showErrorDialog(context, 'Ошибка подключения: $e');
     return {};
   }
