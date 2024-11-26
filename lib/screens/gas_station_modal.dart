@@ -284,8 +284,6 @@ class GasStationInfoModal extends StatelessWidget {
                             spacing: 8,
                             runSpacing: 8,
                             children: [
-                              _buildPaymentOption('Безналичный расчет'),
-                              _buildPaymentOption('Бесконтактные платежи'),
                               _buildPaymentOption('Топливные карты'),
                             ],
                           ),

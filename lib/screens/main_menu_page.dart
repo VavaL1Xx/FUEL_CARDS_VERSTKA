@@ -251,16 +251,16 @@ class MainMenuPage extends StatelessWidget {
                     title: 'Операции по счету',
                     onTap: (){},
                   ),
-                  _buildMenuItem(
-                    image: Image.asset(
-                      'assets/png/Chart.png', // Фото для операций по карте
-                      width: 18.01,
-                      height: 16.67,
-                      color: Colors.white, // Цветовое наложение (по необходимости)
-                    ),
-                    title: 'Операции по карте',
-                    onTap: (){},
-                  ),
+                  // _buildMenuItem(
+                  //   image: Image.asset(
+                  //     'assets/png/Chart.png', // Фото для операций по карте
+                  //     width: 18.01,
+                  //     height: 16.67,
+                  //     color: Colors.white, // Цветовое наложение (по необходимости)
+                  //   ),
+                  //   title: 'Операции по карте',
+                  //   onTap: (){},
+                  // ),
                 ],
               ),
             ),
