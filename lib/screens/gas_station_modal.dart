@@ -288,28 +288,28 @@ class GasStationInfoModal extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 24),
-                          const Text(
-                            'Услуги',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 12,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Text(
-                              'Автомойка',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
+                          // const Text(
+                          //   'Услуги',
+                          //   style: TextStyle(
+                          //     fontSize: 20,
+                          //     fontWeight: FontWeight.bold,
+                          //   ),
+                          // ),
+                          // const SizedBox(height: 16),
+                          // Container(
+                          //   padding: const EdgeInsets.symmetric(
+                          //     horizontal: 16,
+                          //     vertical: 12,
+                          //   ),
+                          //   decoration: BoxDecoration(
+                          //     color: Colors.grey[100],
+                          //     borderRadius: BorderRadius.circular(12),
+                          //   ),
+                          //   child: const Text(
+                          //     'Автомойка',
+                          //     style: TextStyle(fontSize: 16),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
