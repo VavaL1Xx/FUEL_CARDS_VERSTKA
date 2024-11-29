@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 
 import './main_menu_page.dart';
 import './gas_station_modal.dart';
+import './user_login_page.dart';
+import './auth_storage.dart';
 
 class GasStation {
   final int id;
@@ -47,8 +49,26 @@ class _MapScreenState extends State<MapScreen> {
   }
 
 Future<void> _fetchGasStations() async {
+  final authStorage = AuthStorage();
+  final String? token = await authStorage.getToken();
+
+  if (token == null || token.isEmpty) {
+    setState(() {
+      _errorMessage = 'Ошибка: пользователь не авторизован.';
+      _isLoading = false;
+    });
+    
+    // Задержка для визуализации ошибки
+    await Future.delayed(const Duration(seconds: 1));
+    
+    Navigator.pushReplacement(
+      context, 
+      MaterialPageRoute(builder: (context) => const LoginPage(title: 'Логин'))
+    );
+    return;
+  }
+
   final url = Uri.parse('https://api-b2b-test.licard.com/smp-provider/api/v1/public/ais/list');
-  const String token = 'c8d8a09ce677eb8a5dd6d303342eb184'; // Замените на ваш токен
   try {
     final response = await http.get(
       url,
@@ -64,14 +84,14 @@ Future<void> _fetchGasStations() async {
 
       setState(() {
         _mapPoints = data
-          .map<GasStation>((item) => GasStation(
-                id: item['azsId'],
-                coordinates: LatLng(
-                  item['azsCoordinates']['lat'],
-                  item['azsCoordinates']['lon'],
-                ),
-              ))
-          .toList();
+            .map<GasStation>((item) => GasStation(
+                  id: item['azsId'],
+                  coordinates: LatLng(
+                    item['azsCoordinates']['lat'],
+                    item['azsCoordinates']['lon'],
+                  ),
+                ))
+            .toList();
         _isLoading = false;
       });
     } else {
@@ -85,19 +105,32 @@ Future<void> _fetchGasStations() async {
   }
 }
 
+
 Future<Map<String, dynamic>> fetchGasStationDetailsFromMap(BuildContext context, int id) async {
+  final authStorage = AuthStorage(); // Используйте AuthStorage
+  final String? token = await authStorage.getToken();
+
+  if (token == null || token.isEmpty) {
+    _showErrorDialog(context, 'Ошибка: пользователь не авторизован.');
+    // Опционально: перенаправление на страницу логина
+    Navigator.pushReplacement(
+      context, 
+      MaterialPageRoute(builder: (context) => const LoginPage(title: 'Логин'))
+    );
+    return {}; 
+  }
+
   final url = Uri.parse('https://api-b2b-test.licard.com/smp-provider/api/v1/public/ais/detail').replace(
     queryParameters: {
       'id': id.toString(),
     },
   );
-  const String token = 'c8d8a09ce677eb8a5dd6d303342eb184'; // Замените на свой токен
 
   try {
     final response = await http.get(
       url,
       headers: {
-        'token': token,
+        'token': token, // Используем токен из хранилища
         'Accept': '*/*',
         'Accept-Encoding': 'gzip, deflate, br',
         'Content-Type': 'application/json',
